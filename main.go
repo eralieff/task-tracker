@@ -82,11 +82,29 @@ func main() {
 
 	case "mark-in-progress":
 		{
-			fmt.Println("mark-in-progress")
+			if len(os.Args) != 3 {
+				log.Fatal("usage: mark-in-progress <id>")
+			}
+
+			err = mark(tasks, "in-progress")
+			if err != nil {
+				log.Fatal("error marking task: ", err)
+			}
+
+			fmt.Println("Task marked in-progress.")
 		}
 	case "mark-done":
 		{
-			fmt.Println("mark-done")
+			if len(os.Args) != 3 {
+				log.Fatal("usage: mark-done <id>")
+			}
+
+			err = mark(tasks, "done")
+			if err != nil {
+				log.Fatal("error marking task: ", err)
+			}
+
+			fmt.Println("Task marked done.")
 		}
 	case "list":
 		{
@@ -118,4 +136,21 @@ func main() {
 			fmt.Println("unknown command")
 		}
 	}
+}
+
+func mark(tasks []task.Task, status string) error {
+	id, err := strconv.Atoi(os.Args[2])
+	if err != nil {
+		return err
+	}
+
+	if marked := task.MarkTask(tasks, id, status); !marked {
+		return fmt.Errorf("task %d not found", id)
+	}
+
+	if err = task.WriteTasks(tasks); err != nil {
+		return err
+	}
+
+	return nil
 }

@@ -41,3 +41,13 @@ func DeleteTask(tasks []Task, id int) ([]Task, bool) {
 	}
 	return tasks, false
 }
+
+func MarkTask(tasks []Task, id int, status string) bool {
+	for i := range tasks {
+		if tasks[i].Id == id {
+			tasks[i].Status = status
+			return true
+		}
+	}
+	return false
+}
