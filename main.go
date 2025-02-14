@@ -110,6 +110,49 @@ func main() {
 	case "delete":
 		{
 			fmt.Println("delete")
+			if len(os.Args) != 3 {
+				log.Fatal("usage: delete <id>")
+			}
+
+			data, err := readFileIfExists("tasks.json")
+			if err != nil {
+				log.Fatal("error reading file: ", err)
+			}
+
+			var tasks []Task
+			if len(data) != 0 {
+				err = json.Unmarshal(data, &tasks)
+				if err != nil {
+					log.Fatal("error unmarshalling json: ", err)
+				}
+			} else {
+				log.Println("file is empty, you need to add tasks")
+				return
+			}
+
+			id, err := strconv.Atoi(os.Args[2])
+			if err != nil {
+				log.Fatal("error converting id to int: ", err)
+			}
+
+			taskExists := false
+			for i := range tasks {
+				if tasks[i].Id == id {
+					tasks = append(tasks[:i], tasks[i+1:]...)
+					taskExists = true
+					break
+				}
+			}
+
+			if !taskExists {
+				log.Printf("task %d not found", id)
+				return
+			}
+
+			err = writeTasksToFile(tasks, "tasks.json")
+			if err != nil {
+				log.Fatal("error writing tasks to file: ", err)
+			}
 		}
 	case "mark-in-progress":
 		{
