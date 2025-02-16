@@ -112,23 +112,23 @@ func main() {
 				switch os.Args[2] {
 				case "done":
 					{
-						fmt.Println("done")
+						list(tasks, "done")
 					}
 				case "to-do":
 					{
-						fmt.Println("to-do")
+						list(tasks, "to-do")
 					}
 				case "in-progress":
 					{
-						fmt.Println("in-progress")
+						list(tasks, "in-progress")
 					}
 				default:
 					{
-						fmt.Println("unknown command")
+						log.Fatal("usage: list <done> <to-do> <in-progress>")
 					}
 				}
 			} else {
-				fmt.Println("list")
+				list(tasks, "")
 			}
 		}
 	default:
@@ -153,4 +153,17 @@ func mark(tasks []task.Task, status string) error {
 	}
 
 	return nil
+}
+
+func list(tasks []task.Task, status string) {
+	for i := range tasks {
+		if tasks[i].Status == status || status == "" {
+			fmt.Println("ID:", tasks[i].Id)
+			fmt.Println("Description:", tasks[i].Description)
+			fmt.Println("Status:", tasks[i].Status)
+			fmt.Println("Created:", tasks[i].CreatedAt)
+			fmt.Println("Updated:", tasks[i].UpdatedAt)
+			fmt.Println("")
+		}
+	}
 }
