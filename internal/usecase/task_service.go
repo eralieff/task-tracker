@@ -51,7 +51,7 @@ func (s *TaskService) DeleteTask(id int) error {
 		return err
 	}
 
-	newTasks := []entity.Task{}
+	var newTasks []entity.Task
 	found := false
 	for _, t := range tasks {
 		if t.Id != id {
@@ -95,7 +95,7 @@ func (s *TaskService) ListTasks(status string) ([]entity.Task, error) {
 		return tasks, nil
 	}
 
-	filtered := []entity.Task{}
+	var filtered []entity.Task
 	for _, task := range tasks {
 		if task.Status == status {
 			filtered = append(filtered, task)

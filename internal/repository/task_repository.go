@@ -26,7 +26,7 @@ func (r *FileTaskRepository) ReadTasks() ([]entity.Task, error) {
 	defer file.Close()
 
 	var tasks []entity.Task
-	if err := json.NewDecoder(file).Decode(&tasks); err != nil {
+	if err = json.NewDecoder(file).Decode(&tasks); err != nil {
 		return nil, err
 	}
 

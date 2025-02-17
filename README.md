@@ -35,7 +35,7 @@ A simple command-line tool to manage your tasks efficiently. Supports adding, up
 
 Run the program using:
 ```sh
-  go run main.go <command> [args...]
+  go run cmd/main.go <command> [args...]
 ```
 Or, if you built the binary:
 ```sh
@@ -46,41 +46,45 @@ Or, if you built the binary:
 
 #### ➕ Add a Task
 ```sh
-  go run main.go add "Buy groceries"
+  go run cmd/main.go add "Buy groceries"
 ```
 
 #### ✏️ Update a Task
 ```sh
-  go run main.go update <task_id> "Updated description"
+  go run cmd/main.go update <task_id> "Updated description"
 ```
 
 #### ❌ Delete a Task
 ```sh
-  go run main.go delete <task_id>
+  go run cmd/main.go delete <task_id>
 ```
 
 #### 🚀 Mark Task as In-Progress
 ```sh
-  go run main.go mark-in-progress <task_id>
+  go run cmd/main.go mark-in-progress <task_id>
 ```
 
 #### ✅ Mark Task as Done
 ```sh
-  go run main.go mark-done <task_id>
+  go run cmd/main.go mark-done <task_id>
 ```
 
 #### 📋 List Tasks
 - Show all tasks:
   ```sh
-  go run main.go list  
+  go run cmd/main.go list  
   ```
 - Show only done tasks:
   ```sh
-  go run main.go list done  
+  go run cmd/main.go list done  
+  ```
+- Show only todo tasks:
+  ```sh
+  go run cmd/main.go list todo  
   ```
 - Show tasks in progress:
   ```sh
-  go run main.go list in-progress  
+  go run cmd/main.go list in-progress  
   ```
 
 ---
