@@ -2,6 +2,8 @@
 
 A simple command-line tool to manage your tasks efficiently. Supports adding, updating, deleting, marking tasks, and listing them in different states.
 
+[Project Requirements (Technical Specification)](https://roadmap.sh/projects/task-tracker)
+
 ---
 
 ## 🚀 Features
